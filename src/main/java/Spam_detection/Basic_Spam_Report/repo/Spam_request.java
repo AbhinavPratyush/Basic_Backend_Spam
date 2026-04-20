@@ -27,6 +27,13 @@ public class Spam_request {
     private String type_of_scam;//Can be either Sms or call
     private String Message;
 
+    public Spam_request(String phoneNumber, LocalDateTime time, String type_of_scam, String message) {
+        PhoneNumber = phoneNumber;
+        this.time = time;
+        this.type_of_scam = type_of_scam;
+        Message = message;
+    }
+
     public Spam_request(String phoneNumber) {
         PhoneNumber = phoneNumber;
         time=LocalDateTime.now();
