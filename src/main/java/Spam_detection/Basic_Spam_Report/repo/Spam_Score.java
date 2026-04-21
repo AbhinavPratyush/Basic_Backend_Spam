@@ -29,6 +29,9 @@ public class Spam_Score {
     private int Reports;
 
 
+    public Spam_Score() {
+
+    }
 
     //This will be used by spring , info request will by handled by string only
     public Spam_Score(String phoneNumber, double score, String status, int reports) {
