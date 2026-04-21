@@ -7,6 +7,7 @@ import java.util.List;
 
 @Repository
 public interface Spam_request_impl extends MongoRepository<Spam_request, String> {
+
     Spam_request findByPhoneNumber(String phoneNumber);
 
 

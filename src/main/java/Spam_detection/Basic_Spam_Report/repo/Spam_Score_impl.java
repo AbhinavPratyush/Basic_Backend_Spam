@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface Spam_Score_impl extends MongoRepository<Spam_Score,String> {
+    Spam_Score findByPhoneNumber(String PhoneNumber);
 }
