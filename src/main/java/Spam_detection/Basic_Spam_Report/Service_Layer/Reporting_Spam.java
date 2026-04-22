@@ -15,24 +15,22 @@ public class Reporting_Spam {
     Spam_Score_impl SpamScore;
 
     public void Reporting_a_number(String PhoneNumber){
-        Spam_request spamRequest=SpamReport.findByPhoneNumber(PhoneNumber);
+        //Clean insertion of the spam report
+        Spam_request spamRequest=new Spam_request("SMS",PhoneNumber,"HAkoona MATata");
+        SpamReport.save(spamRequest);
         Spam_Score spamScore=new Spam_Score();
         Boolean PreviousReport=true;
-        try {
-            spamScore = SpamScore.findByPhoneNumber(PhoneNumber);
-        }
-        catch (Exception e){
-            PreviousReport=false;
-        }
+
+        spamScore = SpamScore.findByPhoneNumber(PhoneNumber);
+        if(spamScore==null)
+            {PreviousReport=false;}
         if(PreviousReport){
             spamScore.setScore(spamScore.getScore()*1.01);
             spamScore.setReports(spamScore.getReports()+1);
-
         }
         else{
             spamScore=new Spam_Score(PhoneNumber,0.01,"Not Spam",1);
         }
         SpamScore.save(spamScore);
-        SpamReport.save(spamRequest);
     }
 }

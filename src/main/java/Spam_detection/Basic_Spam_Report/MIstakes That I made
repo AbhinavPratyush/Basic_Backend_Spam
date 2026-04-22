@@ -1,0 +1,17 @@
+*#*1. not running the containers with volume *#*
+
+    problem: once the container stops the data is lost completely
+    Solution: created a volume and then ran container in that volume, so that data will not be lost
+    Bonus points:learned to create a docker-compose file.
+                 learned to identify what does container and volume look like in docker compose
+                 learnt to use docker-compose up -d mode to ensure that db is active before we try to connect with it
+
+*#*2. Nomenclature of variables , class , objects is poorly done  *#*
+
+    problem: often mismatch , and confusion around writing the find function
+            the naming mismatch in my js file , @request param and actual obj name was causing warning and systum
+            failure {not crash, so no log so help in debugging specially in http request naming mismatch}
+    solution: camelcases for variables , and proper names for classes. Checked for any naming mismatch in js(found and corrected)
+    Bonus point: reading code elaborately helps find the line of error, reading logs helps to debug
+
+---> always use system.out.print() helps to under stand which part is running and which part is malfunctioning

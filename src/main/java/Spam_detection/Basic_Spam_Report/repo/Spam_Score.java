@@ -23,10 +23,10 @@ public class Spam_Score {
     * */
 
     @Id
-    private String PhoneNumber;
-    private double Score;
-    private String Status;
-    private int Reports;
+    private String phoneNumber;
+    private double score;
+    private String status;
+    private int reports;
 
 
     public Spam_Score() {
@@ -35,42 +35,42 @@ public class Spam_Score {
 
     //This will be used by spring , info request will by handled by string only
     public Spam_Score(String phoneNumber, double score, String status, int reports) {
-        PhoneNumber = phoneNumber;
-        Score = score;
-        Status = status;
-        Reports = reports;
+        this.phoneNumber = phoneNumber;
+        this.score = score;
+        this.status = status;
+        this.reports = reports;
     }
 
     public int getReports() {
-        return Reports;
+        return reports;
     }
 
     public void setReports(int reports) {
-        Reports = reports;
+        this.reports = reports;
     }
 
     public String getStatus() {
-        return Status;
+        return status;
     }
 
     public void setStatus(String status) {
-        Status = status;
+        this.status = status;
     }
 
     public double getScore() {
-        return Score;
+        return score;
     }
 
     public void setScore(double score) {
-        Score = score;
+        this.score = score;
     }
 
     public String getPhoneNumber() {
-        return PhoneNumber;
+        return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        PhoneNumber = phoneNumber;
+        this.phoneNumber = phoneNumber;
     }
 
 
