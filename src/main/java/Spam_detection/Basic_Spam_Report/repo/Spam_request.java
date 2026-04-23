@@ -20,7 +20,7 @@ public class Spam_request {
     *
     * */
 
-    @Id
+
     private String phoneNumber;
     private LocalDateTime time;
     private String type_of_scam;//Can be either Sms or call

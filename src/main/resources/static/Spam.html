@@ -2,39 +2,50 @@
 <html>
 <head>
   <title>Spam Reporter</title>
-
 </head>
 <body>
 
-<h2>Report Spam Number</h2>
+<h2>Spam Tool</h2>
 
-<form id="spamForm">
-  <label>Phone Number:</label><br>
-  <input type="text" id="phoneNumber" name="phoneNumber" required><br><br>
+<input type="text" id="phoneNumber" placeholder="Enter phone number">
+<br><br>
 
-  <button type="submit">Report Spam</button>
-</form>
+<button id="report">Report Spam</button>
+<button id="check">Check Score</button>
+
+<p id="response"></p>
+
 <script>
-  document.getElementById("spamForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-
+  document.getElementById("report").addEventListener("click", function() {
       const number = document.getElementById("phoneNumber").value;
 
-      fetch(`/SpamReport?phoneNumber=${number}`, {
+      fetch(`http://localhost:8080/SpamReport?phoneNumber=${number}`, {
           method: "POST"
       })
       .then(res => res.text())
       .then(data => {
-          document.getElementById("response").innerText = "Response: " + data;
+          document.getElementById("response").innerText = data;
+      })
+      .catch(err => {
+          document.getElementById("response").innerText = "Error: " + err;
+      });
+  });
+
+  document.getElementById("check").addEventListener("click", function() {
+      const number = document.getElementById("phoneNumber").value;
+
+      fetch(`http://localhost:8080/CheckScore?phoneNumber=${number}`, {
+          method: "POST"
+      })
+      .then(res => res.text())
+      .then(data => {
+          document.getElementById("response").innerText = data;
       })
       .catch(err => {
           document.getElementById("response").innerText = "Error: " + err;
       });
   });
 </script>
-<p id="response"></p>
-
-
 
 </body>
 </html>

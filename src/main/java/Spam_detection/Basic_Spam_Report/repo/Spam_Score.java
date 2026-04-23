@@ -26,6 +26,17 @@ public class Spam_Score {
     private String phoneNumber;
     private double score;
     private String status;
+
+    @Override
+    public String toString() {
+        return "Spam_Score{" +
+                "phoneNumber='" + phoneNumber + '\'' +
+                ", score=" + score +
+                ", status='" + status + '\'' +
+                ", reports=" + reports +
+                '}';
+    }
+
     private int reports;
 
 

@@ -25,12 +25,33 @@ public class Reporting_Spam {
         if(spamScore==null)
             {PreviousReport=false;}
         if(PreviousReport){
-            spamScore.setScore(spamScore.getScore()*1.01);
-            spamScore.setReports(spamScore.getReports()+1);
+            double gf=spamScore.getScore();
+            int bf=spamScore.getReports();
+
+            spamScore.setScore(gf+(1/(Math.pow(bf,1.01)+10)));
+            spamScore.setReports(bf+1);
+            spamScore.setStatus(statusOfScore(spamScore.getScore()));
+            SpamScore.save(spamScore);
+
         }
         else{
-            spamScore=new Spam_Score(PhoneNumber,0.01,"Not Spam",1);
+            spamScore=new Spam_Score(PhoneNumber,0.0001,"Not Spam",1);
+            SpamScore.save(spamScore);
         }
-        SpamScore.save(spamScore);
+
     }
+
+    private String statusOfScore(double score){
+        String op="We are hacked dont belive us";
+        if(score<0.5){op="theeke aadmi hai, not spam";}
+        else if(score<1){op="Kuch to gadbad hai , nazar rakho, maybe scam";}
+        else if (score<1.5) {
+            op="Mummy jis aadmi se door rehne bolti thi yahi aadmi hai, scam";
+        }
+        else {
+            op="vijay maalya issi se seekh ke gaya hai. Threat to humanity";
+        }
+        return op;
+    }
+
 }
