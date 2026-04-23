@@ -11,13 +11,13 @@ public class FindingScore {
     @Autowired
     Spam_Score_impl spamScoreImpl;
 
-    public String FindScoreOf(String phoneNumber){
+    public Spam_Score FindScoreOf(String phoneNumber){
         Spam_Score spamScore=spamScoreImpl.findByPhoneNumber(phoneNumber);
         if(spamScore==null){
             return "Nirdosh aadmi hai, bekaar shAQ MATT KARO";
         }
 
-        return spamScore.toString();
+        return spamScore;
 
     }
 }

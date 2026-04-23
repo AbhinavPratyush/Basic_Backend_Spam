@@ -14,7 +14,7 @@ public class Reporting_Spam {
     @Autowired
     Spam_Score_impl SpamScore;
 
-    public void Reporting_a_number(String PhoneNumber){
+    public Spam_Score Reporting_a_number(String PhoneNumber){
         //Clean insertion of the spam report
         Spam_request spamRequest=new Spam_request("SMS",PhoneNumber,"HAkoona MATata");
         SpamReport.save(spamRequest);
@@ -38,6 +38,7 @@ public class Reporting_Spam {
             spamScore=new Spam_Score(PhoneNumber,0.0001,"Not Spam",1);
             SpamScore.save(spamScore);
         }
+        return spamScore;
 
     }
 
