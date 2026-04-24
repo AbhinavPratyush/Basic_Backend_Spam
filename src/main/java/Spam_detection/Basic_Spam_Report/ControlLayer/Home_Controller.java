@@ -1,5 +1,6 @@
 package Spam_detection.Basic_Spam_Report.ControlLayer;
 
+import Spam_detection.Basic_Spam_Report.DTO.SpamResponse;
 import Spam_detection.Basic_Spam_Report.Service_Layer.FindingScore;
 import Spam_detection.Basic_Spam_Report.Service_Layer.Reporting_Spam;
 import Spam_detection.Basic_Spam_Report.repo.Spam_Score;
@@ -17,19 +18,19 @@ public class Home_Controller {
     Reporting_Spam rs;
 
     @PostMapping("/SpamReport")
-    public Spam_Score report(@RequestParam("phoneNumber") String phoneNumber){
+    public SpamResponse report(@RequestParam("phoneNumber") String phoneNumber){
         Spam_Score s=rs.Reporting_a_number(phoneNumber);
         System.out.print(phoneNumber+"has been Reported");
-        return s;
+        return new SpamResponse(s);
     }
 
     @Autowired
     FindingScore f;
 
     @PostMapping("/CheckScore")
-    public Spam_Score whatIsTheScore(@RequestParam("phoneNumber") String phoneNumber){
+    public SpamResponse whatIsTheScore(@RequestParam("phoneNumber") String phoneNumber){
         Spam_Score whatIsFound=f.FindScoreOf(phoneNumber);
         System.out.println(whatIsFound.toString());
-return whatIsFound;
+return new SpamResponse(whatIsFound);
     }
 }

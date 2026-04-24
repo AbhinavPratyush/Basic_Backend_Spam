@@ -1,5 +1,6 @@
 HELP.md
 src/main/resources/application-dev.properties
+src/main/java/Spam_detection/Basic_Spam_Report/Agenda
 target/
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/

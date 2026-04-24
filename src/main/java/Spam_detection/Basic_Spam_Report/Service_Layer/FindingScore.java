@@ -1,5 +1,6 @@
 package Spam_detection.Basic_Spam_Report.Service_Layer;
 
+import Spam_detection.Basic_Spam_Report.DTO.SpamResponse;
 import Spam_detection.Basic_Spam_Report.repo.Spam_Score;
 import Spam_detection.Basic_Spam_Report.repo.Spam_Score_impl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,8 @@ public class FindingScore {
     public Spam_Score FindScoreOf(String phoneNumber){
         Spam_Score spamScore=spamScoreImpl.findByPhoneNumber(phoneNumber);
         if(spamScore==null){
-            return "Nirdosh aadmi hai, bekaar shAQ MATT KARO";
+            System.out.println("Nirdosh aadmi hai, bekaar shAQ MATT KARO");
+            return null;
         }
 
         return spamScore;

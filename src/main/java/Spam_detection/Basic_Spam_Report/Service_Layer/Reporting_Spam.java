@@ -1,5 +1,6 @@
 package Spam_detection.Basic_Spam_Report.Service_Layer;
 
+import Spam_detection.Basic_Spam_Report.DTO.SpamResponse;
 import Spam_detection.Basic_Spam_Report.repo.Spam_Score;
 import Spam_detection.Basic_Spam_Report.repo.Spam_Score_impl;
 import Spam_detection.Basic_Spam_Report.repo.Spam_request;
@@ -16,6 +17,9 @@ public class Reporting_Spam {
 
     public Spam_Score Reporting_a_number(String PhoneNumber){
         //Clean insertion of the spam report
+        if(phoneNumberValidity(PhoneNumber)){
+            return null;
+        }
         Spam_request spamRequest=new Spam_request("SMS",PhoneNumber,"HAkoona MATata");
         SpamReport.save(spamRequest);
         Spam_Score spamScore=new Spam_Score();
@@ -24,6 +28,8 @@ public class Reporting_Spam {
         spamScore = SpamScore.findByPhoneNumber(PhoneNumber);
         if(spamScore==null)
             {PreviousReport=false;}
+
+
         if(PreviousReport){
             double gf=spamScore.getScore();
             int bf=spamScore.getReports();
@@ -53,6 +59,21 @@ public class Reporting_Spam {
             op="vijay maalya issi se seekh ke gaya hai. Threat to humanity";
         }
         return op;
+    }
+
+    public Boolean phoneNumberValidity(String phn){
+        if(phn.length()!=10 || phn.charAt(0)=='0') {
+            return false;
+        }
+        for(int i=0; i<10;i++){
+            if((int)phn.charAt(i)<=57 && (int)phn.charAt(i)>=48){
+                continue;
+            }
+            else{
+                return false;
+            }
+        }
+        return true;
     }
 
 }
