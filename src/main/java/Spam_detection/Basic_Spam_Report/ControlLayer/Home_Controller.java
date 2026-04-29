@@ -36,9 +36,12 @@ public class Home_Controller {
         System.out.println(whatIsFound.toString());
         return new SpamResponse(whatIsFound);
     }
+
+    @Autowired
+    PredictionService predictionService;
     @PostMapping("/prediction")
     public GotFromPrediction APIforPython(@RequestBody SentForPrediction sentForPrediction){
-        PredictionService predictionService=new PredictionService();
+
         GotFromPrediction prediction=predictionService.getPrediction(sentForPrediction);
         return prediction;
     }

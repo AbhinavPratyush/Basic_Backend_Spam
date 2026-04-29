@@ -3,6 +3,9 @@ package Spam_detection.Basic_Spam_Report.DTO;
 public class SentForPrediction {
     String message;
 
+    public SentForPrediction() {
+    }
+
     public SentForPrediction(String message) {
         this.message = message;
     }

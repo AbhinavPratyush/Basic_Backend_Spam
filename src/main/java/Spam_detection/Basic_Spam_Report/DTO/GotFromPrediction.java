@@ -1,6 +1,9 @@
 package Spam_detection.Basic_Spam_Report.DTO;
 
 public class GotFromPrediction {
+    public GotFromPrediction() {
+    }
+
     String label;
     Float prediction;
 
