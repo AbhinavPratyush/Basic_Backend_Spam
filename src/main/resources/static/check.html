@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Check Number</title>
+  <style>
+    body {
+        font-family: Arial;
+        text-align: center;
+        background: #f5f5f5;
+    }
+    .container {
+        margin-top: 50px;
+    }
+    input {
+        padding: 10px;
+        width: 250px;
+        margin: 10px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
+    button {
+        padding: 10px 20px;
+        background: #FF5722;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+    button:hover {
+        background: #E64A19;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <h2>Check Spam Score</h2>
+
+  <input type="text" id="phone" placeholder="Phone Number"><br>
+
+  <button onclick="check()">Check</button>
+
+</div>
+
+<script>
+  function check() {
+      const phone = document.getElementById("phone").value;
+
+      fetch("http://localhost:8080/CheckScore?phoneNumber=" + phone, {
+          method: "POST"
+      })
+      .then(res => res.json())
+      .then(data => {
+          alert("Score: " + JSON.stringify(data));
+          console.log(data);
+      })
+      .catch(err => console.error(err));
+  }
+</script>
+
+</body>
+</html>

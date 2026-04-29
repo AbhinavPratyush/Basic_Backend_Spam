@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Spam Detection</title>
+  <style>
+    body {
+        font-family: Arial;
+        text-align: center;
+        background: #f5f5f5;
+    }
+    h1 { margin-top: 50px; }
+    button {
+        padding: 15px 30px;
+        margin: 20px;
+        font-size: 18px;
+        border: none;
+        background: #4CAF50;
+        color: white;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+    button:hover {
+        background: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Spam Detection System</h1>
+
+<button onclick="goToReport()">Report</button>
+<button onclick="goToCheck()">Check</button>
+
+<script>
+  function goToReport() {
+      window.location.href = "report.html";
+  }
+
+  function goToCheck() {
+      window.location.href = "check.html";
+  }
+</script>
+
+</body>
+</html>

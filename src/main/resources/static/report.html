@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Report Spam</title>
+  <style>
+    body {
+        font-family: Arial;
+        background: #f5f5f5;
+        text-align: center;
+    }
+    .container {
+        margin-top: 50px;
+    }
+    input {
+        padding: 10px;
+        margin: 10px;
+        width: 250px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+    }
+    button {
+        padding: 10px 20px;
+        margin: 10px;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+    button:hover {
+        background: #1976D2;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <h2>Report Spam</h2>
+
+  <input type="text" id="phone" placeholder="Phone Number"><br>
+
+  <button onclick="showMessageField()">Add Message</button><br>
+
+  <input type="text" id="message" placeholder="Message (optional)" style="display:none;"><br>
+
+  <button onclick="report()">Report</button>
+
+</div>
+
+<script>
+  function showMessageField() {
+      document.getElementById("message").style.display = "inline";
+  }
+
+  function report() {
+      const phone = document.getElementById("phone").value;
+      const message = document.getElementById("message").value;
+
+      const data = {
+          phoneNumber: phone,
+          message: message
+      };
+
+      fetch("http://localhost:8080/SpamReport", {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+      })
+      .then(res => res.json())
+      .then(data => {
+          alert("Reported successfully!");
+          console.log(data);
+      })
+      .catch(err => {
+          console.error(err);
+      });
+  }
+</script>
+
+</body>
+</html>
