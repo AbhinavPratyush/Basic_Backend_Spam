@@ -1,7 +1,10 @@
 package Spam_detection.Basic_Spam_Report.ControlLayer;
 
+import Spam_detection.Basic_Spam_Report.DTO.GotFromPrediction;
+import Spam_detection.Basic_Spam_Report.DTO.SentForPrediction;
 import Spam_detection.Basic_Spam_Report.DTO.SpamResponse;
 import Spam_detection.Basic_Spam_Report.Service_Layer.FindingScore;
+import Spam_detection.Basic_Spam_Report.Service_Layer.PredictionService;
 import Spam_detection.Basic_Spam_Report.Service_Layer.Reporting_Spam;
 import Spam_detection.Basic_Spam_Report.repo.Spam_Score;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +34,14 @@ public class Home_Controller {
     public SpamResponse whatIsTheScore(@RequestParam("phoneNumber") String phoneNumber){
         Spam_Score whatIsFound=f.FindScoreOf(phoneNumber);
         System.out.println(whatIsFound.toString());
-return new SpamResponse(whatIsFound);
+        return new SpamResponse(whatIsFound);
     }
+    @PostMapping("/prediction")
+    public GotFromPrediction APIforPython(@RequestBody SentForPrediction sentForPrediction){
+        PredictionService predictionService=new PredictionService();
+        GotFromPrediction prediction=predictionService.getPrediction(sentForPrediction);
+        return prediction;
+    }
+
+
 }
