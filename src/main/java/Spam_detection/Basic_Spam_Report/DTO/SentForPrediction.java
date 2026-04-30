@@ -6,6 +6,13 @@ public class SentForPrediction {
     public SentForPrediction() {
     }
 
+    @Override
+    public String toString() {
+        return "SentForPrediction{" +
+                "message='" + message + '\'' +
+                '}';
+    }
+
     public SentForPrediction(String message) {
         this.message = message;
     }

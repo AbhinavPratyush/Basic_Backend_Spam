@@ -23,7 +23,7 @@ public class Spam_request {
 
     private String phoneNumber;
     private LocalDateTime time;
-    private String type_of_scam;//Can be either Sms or call
+    private String type_of_scam="Call";//Can be either Sms or call
     private String message;
 
     public Spam_request(String phoneNumber, LocalDateTime time, String type_of_scam, String message) {

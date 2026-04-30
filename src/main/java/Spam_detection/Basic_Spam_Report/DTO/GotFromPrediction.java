@@ -4,6 +4,14 @@ public class GotFromPrediction {
     public GotFromPrediction() {
     }
 
+    @Override
+    public String toString() {
+        return "GotFromPrediction{" +
+                "label='" + label + '\'' +
+                ", prediction=" + prediction +
+                '}';
+    }
+
     String label;
     Float prediction;
 

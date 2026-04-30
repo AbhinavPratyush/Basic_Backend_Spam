@@ -1,5 +1,7 @@
 package Spam_detection.Basic_Spam_Report.Service_Layer;
 
+import Spam_detection.Basic_Spam_Report.DTO.GotFromPrediction;
+import Spam_detection.Basic_Spam_Report.DTO.SentForPrediction;
 import Spam_detection.Basic_Spam_Report.DTO.SpamResponse;
 import Spam_detection.Basic_Spam_Report.repo.Spam_Score;
 import Spam_detection.Basic_Spam_Report.repo.Spam_Score_impl;
@@ -17,9 +19,9 @@ public class Reporting_Spam {
 
     public Spam_Score Reporting_a_number(String PhoneNumber){
         //Clean insertion of the spam report
-        if(phoneNumberValidity(PhoneNumber)){
-            return null;
-        }
+//        if(phoneNumberValidity(PhoneNumber)){
+//            return null;
+//        }
         Spam_request spamRequest=new Spam_request("SMS",PhoneNumber,"HAkoona MATata");
         SpamReport.save(spamRequest);
         Spam_Score spamScore=new Spam_Score();
@@ -76,4 +78,45 @@ public class Reporting_Spam {
         return true;
     }
 
+    @Autowired
+    PredictionService predictionService;
+
+    public Spam_Score Reporting_a_message(String phoneNumber, String message) {
+//        if(phoneNumberValidity(phoneNumber)){
+//            return null;
+//        }
+        Spam_request spamRequest=new Spam_request("SMS",phoneNumber,message);
+        SpamReport.save(spamRequest);
+/*        the spam is saved here
+        now we will update the score
+        we are going to call the api for our dl model here
+
+
+*/
+        GotFromPrediction prediction=predictionService.getPrediction(new SentForPrediction(message));
+        Spam_Score spamScore= SpamScore.findByPhoneNumber(phoneNumber);
+        System.out.println(prediction.toString());
+
+        if(spamScore==null){
+
+            spamScore=new Spam_Score(phoneNumber,prediction.getPrediction(),prediction.getLabel(),1);
+        }
+        else{
+            spamScore.setReports(spamScore.getReports()+1);
+
+            double gf=spamScore.getScore();
+            int bf=spamScore.getReports()-1;
+
+            spamScore.setScore(prediction.getPrediction()+gf+(1/(Math.pow(bf,1.01)+10)));
+
+
+            spamScore.setStatus(statusOfScore(spamScore.getScore()));
+
+
+            spamScore.setPhoneNumber(phoneNumber);
+
+        }
+        SpamScore.save(spamScore);
+        return spamScore;
+    }
 }

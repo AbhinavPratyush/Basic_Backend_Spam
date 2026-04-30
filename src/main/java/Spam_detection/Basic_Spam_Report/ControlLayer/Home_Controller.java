@@ -1,5 +1,6 @@
 package Spam_detection.Basic_Spam_Report.ControlLayer;
 
+import Spam_detection.Basic_Spam_Report.DTO.ClientToServerDTO;
 import Spam_detection.Basic_Spam_Report.DTO.GotFromPrediction;
 import Spam_detection.Basic_Spam_Report.DTO.SentForPrediction;
 import Spam_detection.Basic_Spam_Report.DTO.SpamResponse;
@@ -21,9 +22,17 @@ public class Home_Controller {
     Reporting_Spam rs;
 
     @PostMapping("/SpamReport")
-    public SpamResponse report(@RequestParam("phoneNumber") String phoneNumber){
-        Spam_Score s=rs.Reporting_a_number(phoneNumber);
-        System.out.print(phoneNumber+"has been Reported");
+    public SpamResponse report(@RequestBody ClientToServerDTO ctsd){
+        Spam_Score s;
+        if(ctsd.getMessage()==null){
+            //then this is call spam
+            s=rs.Reporting_a_number(ctsd.getPhoneNumber());
+        }
+        else{
+            //it is an sms spam
+           s=rs.Reporting_a_message(ctsd.getPhoneNumber(),ctsd.getMessage());
+        }
+        System.out.println(s.toString());
         return new SpamResponse(s);
     }
 
